@@ -24,7 +24,5 @@ export default {
 </script>
 
 <style lang="scss">
-.view-home {
-  color: red;
-}
+@import '../styles/home.scss';
 </style>

@@ -39,8 +39,7 @@ const config = merge(baseConfig, {
 
 config.plugins.push(new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../index.html'),
-  filename: 'index.html',
-  inject: 'body',
+  filename: 'index.html'
 }));
 
 module.exports = config;

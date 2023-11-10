@@ -18,6 +18,7 @@ const config = merge(baseConfig, {
     library: {
       type: 'module', // native nodejs module
     },
+    chunkFormat: "commonjs"
   },
   target: 'node', // in node env
   node: {
@@ -29,7 +30,6 @@ const config = merge(baseConfig, {
     // polyfill, .vue, .css
     allowlist: [
       // /^vue-meta*/,
-      /\.(css|sass|scss)$/,
       /\.(vue)$/,
       /\.(html)$/,
     ],

@@ -4,9 +4,9 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
-const isProd = process.env.NODE_ENV === 'production';
-
+const isProd = true;
 const config = {
   mode: process.env.NODE_ENV,
   module: {
@@ -59,6 +59,7 @@ if (isProd) {
     filename: 'css/[name].[contenthash].css',
     chunkFilename: 'css/[id].[contenthash].css',
   }));
+  config.plugins.push(new HTMLInlineCSSWebpackPlugin());
   config.optimization.minimizer.push(new TerserPlugin());
 }
 

@@ -5,8 +5,8 @@ import serverEntry from '../.ssr/entry-server.js';
 
 /**
  * renderMetaToString
- * @param {vue app instance} app 
- * @returns 
+ * @param {vue app instance} app
+ * @returns
  */
 async function renderMetaToString(app) {
   const ctx = {};
@@ -40,13 +40,15 @@ async function renderWithMeta(app) {
     path.join(__dirname, '../.ssr/index.html'),
     'utf-8',
   );
-
+  console.log('ctx.teleports.head', ctx.teleports?.head);
+  console.log('ctx.teleports.headAttrs', ctx.teleports?.headAttrs);
+  console.log('ctx', ctx);
   return wrapper
-    .replace('{{ HTML_ATTRS }}', ctx.teleports.htmlAttrs || '')
-    .replace('{{ HEAD_ATTRS }}', ctx.teleports.headAttrs || '')
-    .replace('{{ HEAD }}', ctx.teleports.head || '')
-    .replace('{{ BODY_ATTRS }}', ctx.teleports.bodyAttrs || '')
-    .replace('{{ APP }}', `<div id="__maju">${appHtml}</div>`);
+    .replace('{{ HTML_ATTRS }}', ctx.teleports?.htmlAttrs || '')
+    .replace('{{ HEAD_ATTRS }}', ctx.teleports?.headAttrs || '')
+    .replace('{{ HEAD }}', ctx.teleports?.head || '')
+    .replace('{{ BODY_ATTRS }}', ctx.teleports?.bodyAttrs || '')
+    .replace('{{ APP }}', `<div id="__app">${appHtml}</div>`);
 }
 
 export default function compileServer(serverApp) {
@@ -57,9 +59,10 @@ export default function compileServer(serverApp) {
     };
 
     const app = await serverEntry(context);
-  
+
     const html = await renderWithMeta(app);
-  
+    console.log('html', html);
+
     res.end(html);
   })
 }
